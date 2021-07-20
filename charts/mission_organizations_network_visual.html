@@ -1,0 +1,108 @@
+<html>
+<head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis.css" type="text/css" />
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis-network.min.js"> </script>
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+
+<style type="text/css">
+
+        #mynetwork {
+            width: 100%;
+            height: 650px;
+            background-color: #ffffff;
+            border: 1px solid lightgray;
+            position: relative;
+            float: left;
+        }
+
+        
+
+        
+
+        
+</style>
+
+</head>
+
+<body>
+<div id = "mynetwork"></div>
+
+
+<script type="text/javascript">
+
+    // initialize global variables.
+    var edges;
+    var nodes;
+    var network; 
+    var container;
+    var options, data;
+
+    
+    // This method is responsible for drawing the graph, returns the drawn network
+    function drawGraph() {
+        var container = document.getElementById('mynetwork');
+        
+        
+
+        // parsing and collecting nodes and edges from the python
+        nodes = new vis.DataSet([{"id": "Australia", "label": "Australia", "shape": "dot", "size": 10}, {"id": "AMBA", "label": "AMBA", "shape": "dot", "size": 10}, {"id": "CECLES", "label": "CECLES", "shape": "dot", "size": 10}, {"id": "RAE", "label": "RAE", "shape": "dot", "size": 10}, {"id": "USA", "label": "USA", "shape": "dot", "size": 10}, {"id": "France", "label": "France", "shape": "dot", "size": 10}, {"id": "Barents Sea", "label": "Barents Sea", "shape": "dot", "size": 10}, {"id": "SRC", "label": "SRC", "shape": "dot", "size": 10}, {"id": "Brazil", "label": "Brazil", "shape": "dot", "size": 10}, {"id": "AEB", "label": "AEB", "shape": "dot", "size": 10}, {"id": "China", "label": "China", "shape": "dot", "size": 10}, {"id": "CASC", "label": "CASC", "shape": "dot", "size": 10}, {"id": "CASIC", "label": "CASIC", "shape": "dot", "size": 10}, {"id": "ExPace", "label": "ExPace", "shape": "dot", "size": 10}, {"id": "Landspace", "label": "Landspace", "shape": "dot", "size": 10}, {"id": "OneSpace", "label": "OneSpace", "shape": "dot", "size": 10}, {"id": "i-Space", "label": "i-Space", "shape": "dot", "size": 10}, {"id": "Yellow Sea", "label": "Yellow Sea", "shape": "dot", "size": 10}, {"id": "Arianespace", "label": "Arianespace", "shape": "dot", "size": 10}, {"id": "Arme de l\u0027Air", "label": "Arme de l\u0027Air", "shape": "dot", "size": 10}, {"id": "CNES", "label": "CNES", "shape": "dot", "size": 10}, {"id": "ESA", "label": "ESA", "shape": "dot", "size": 10}, {"id": "Kazakhstan", "label": "Kazakhstan", "shape": "dot", "size": 10}, {"id": "Gran Canaria", "label": "Gran Canaria", "shape": "dot", "size": 10}, {"id": "Northrop", "label": "Northrop", "shape": "dot", "size": 10}, {"id": "India", "label": "India", "shape": "dot", "size": 10}, {"id": "ISRO", "label": "ISRO", "shape": "dot", "size": 10}, {"id": "Iran", "label": "Iran", "shape": "dot", "size": 10}, {"id": "ISA", "label": "ISA", "shape": "dot", "size": 10}, {"id": "Israel", "label": "Israel", "shape": "dot", "size": 10}, {"id": "IAI", "label": "IAI", "shape": "dot", "size": 10}, {"id": "Japan", "label": "Japan", "shape": "dot", "size": 10}, {"id": "ISAS", "label": "ISAS", "shape": "dot", "size": 10}, {"id": "JAXA", "label": "JAXA", "shape": "dot", "size": 10}, {"id": "MHI", "label": "MHI", "shape": "dot", "size": 10}, {"id": "UT", "label": "UT", "shape": "dot", "size": 10}, {"id": "ILS", "label": "ILS", "shape": "dot", "size": 10}, {"id": "Kosmotras", "label": "Kosmotras", "shape": "dot", "size": 10}, {"id": "Land Launch", "label": "Land Launch", "shape": "dot", "size": 10}, {"id": "OKB-586", "label": "OKB-586", "shape": "dot", "size": 10}, {"id": "RVSN USSR", "label": "RVSN USSR", "shape": "dot", "size": 10}, {"id": "Roscosmos", "label": "Roscosmos", "shape": "dot", "size": 10}, {"id": "Starsem", "label": "Starsem", "shape": "dot", "size": 10}, {"id": "VKS RF", "label": "VKS RF", "shape": "dot", "size": 10}, {"id": "Yuzhmash", "label": "Yuzhmash", "shape": "dot", "size": 10}, {"id": "Russia", "label": "Russia", "shape": "dot", "size": 10}, {"id": "Kenya", "label": "Kenya", "shape": "dot", "size": 10}, {"id": "ASI", "label": "ASI", "shape": "dot", "size": 10}, {"id": "New Mexico", "label": "New Mexico", "shape": "dot", "size": 10}, {"id": "Exos", "label": "Exos", "shape": "dot", "size": 10}, {"id": "New Zealand", "label": "New Zealand", "shape": "dot", "size": 10}, {"id": "Rocket Lab", "label": "Rocket Lab", "shape": "dot", "size": 10}, {"id": "North Korea", "label": "North Korea", "shape": "dot", "size": 10}, {"id": "KCST", "label": "KCST", "shape": "dot", "size": 10}, {"id": "Pacific Missile Range Facility", "label": "Pacific Missile Range Facility", "shape": "dot", "size": 10}, {"id": "Sandia", "label": "Sandia", "shape": "dot", "size": 10}, {"id": "Pacific Ocean", "label": "Pacific Ocean", "shape": "dot", "size": 10}, {"id": "Sea Launch", "label": "Sea Launch", "shape": "dot", "size": 10}, {"id": "Eurockot", "label": "Eurockot", "shape": "dot", "size": 10}, {"id": "Khrunichev", "label": "Khrunichev", "shape": "dot", "size": 10}, {"id": "MITT", "label": "MITT", "shape": "dot", "size": 10}, {"id": "Shahrud Missile Test Site", "label": "Shahrud Missile Test Site", "shape": "dot", "size": 10}, {"id": "IRGC", "label": "IRGC", "shape": "dot", "size": 10}, {"id": "South Korea", "label": "South Korea", "shape": "dot", "size": 10}, {"id": "KARI", "label": "KARI", "shape": "dot", "size": 10}, {"id": "Blue Origin", "label": "Blue Origin", "shape": "dot", "size": 10}, {"id": "Boeing", "label": "Boeing", "shape": "dot", "size": 10}, {"id": "Douglas", "label": "Douglas", "shape": "dot", "size": 10}, {"id": "EER", "label": "EER", "shape": "dot", "size": 10}, {"id": "General Dynamics", "label": "General Dynamics", "shape": "dot", "size": 10}, {"id": "Lockheed", "label": "Lockheed", "shape": "dot", "size": 10}, {"id": "Martin Marietta", "label": "Martin Marietta", "shape": "dot", "size": 10}, {"id": "NASA", "label": "NASA", "shape": "dot", "size": 10}, {"id": "SpaceX", "label": "SpaceX", "shape": "dot", "size": 10}, {"id": "ULA", "label": "ULA", "shape": "dot", "size": 10}, {"id": "US Air Force", "label": "US Air Force", "shape": "dot", "size": 10}, {"id": "US Navy", "label": "US Navy", "shape": "dot", "size": 10}, {"id": "Virgin Orbit", "label": "Virgin Orbit", "shape": "dot", "size": 10}]);
+        edges = new vis.DataSet([{"from": "Australia", "number of missions": 1, "to": "AMBA", "weight": 1}, {"from": "Australia", "number of missions": 3, "to": "CECLES", "weight": 1}, {"from": "Australia", "number of missions": 2, "to": "RAE", "weight": 1}, {"from": "AMBA", "number of missions": 7, "to": "USA", "weight": 1}, {"from": "CECLES", "number of missions": 1, "to": "France", "weight": 1}, {"from": "Barents Sea", "number of missions": 3, "to": "SRC", "weight": 1}, {"from": "Brazil", "number of missions": 3, "to": "AEB", "weight": 1}, {"from": "China", "number of missions": 250, "to": "CASC", "weight": 1}, {"from": "China", "number of missions": 5, "to": "CASIC", "weight": 1}, {"from": "China", "number of missions": 10, "to": "ExPace", "weight": 1}, {"from": "China", "number of missions": 1, "to": "Landspace", "weight": 1}, {"from": "China", "number of missions": 1, "to": "OneSpace", "weight": 1}, {"from": "China", "number of missions": 1, "to": "i-Space", "weight": 1}, {"from": "CASC", "number of missions": 1, "to": "Yellow Sea", "weight": 1}, {"from": "France", "number of missions": 277, "to": "Arianespace", "weight": 1}, {"from": "France", "number of missions": 4, "to": "Arme de l\u0027Air", "weight": 1}, {"from": "France", "number of missions": 8, "to": "CNES", "weight": 1}, {"from": "France", "number of missions": 13, "to": "ESA", "weight": 1}, {"from": "Arianespace", "number of missions": 2, "to": "Kazakhstan", "weight": 1}, {"from": "Gran Canaria", "number of missions": 2, "to": "Northrop", "weight": 1}, {"from": "Northrop", "number of missions": 81, "to": "USA", "weight": 1}, {"from": "India", "number of missions": 76, "to": "ISRO", "weight": 1}, {"from": "Iran", "number of missions": 13, "to": "ISA", "weight": 1}, {"from": "Israel", "number of missions": 11, "to": "IAI", "weight": 1}, {"from": "Japan", "number of missions": 30, "to": "ISAS", "weight": 1}, {"from": "Japan", "number of missions": 7, "to": "JAXA", "weight": 1}, {"from": "Japan", "number of missions": 84, "to": "MHI", "weight": 1}, {"from": "Japan", "number of missions": 5, "to": "UT", "weight": 1}, {"from": "Kazakhstan", "number of missions": 6, "to": "ILS", "weight": 1}, {"from": "Kazakhstan", "number of missions": 12, "to": "Kosmotras", "weight": 1}, {"from": "Kazakhstan", "number of missions": 7, "to": "Land Launch", "weight": 1}, {"from": "Kazakhstan", "number of missions": 2, "to": "OKB-586", "weight": 1}, {"from": "Kazakhstan", "number of missions": 579, "to": "RVSN USSR", "weight": 1}, {"from": "Kazakhstan", "number of missions": 47, "to": "Roscosmos", "weight": 1}, {"from": "Kazakhstan", "number of missions": 1, "to": "Starsem", "weight": 1}, {"from": "Kazakhstan", "number of missions": 44, "to": "VKS RF", "weight": 1}, {"from": "Kazakhstan", "number of missions": 1, "to": "Yuzhmash", "weight": 1}, {"from": "ILS", "number of missions": 40, "to": "USA", "weight": 1}, {"from": "Kosmotras", "number of missions": 10, "to": "Russia", "weight": 1}, {"from": "RVSN USSR", "number of missions": 1198, "to": "Russia", "weight": 1}, {"from": "Roscosmos", "number of missions": 8, "to": "Russia", "weight": 1}, {"from": "VKS RF", "number of missions": 157, "to": "Russia", "weight": 1}, {"from": "Yuzhmash", "number of missions": 1, "to": "Russia", "weight": 1}, {"from": "Kenya", "number of missions": 9, "to": "ASI", "weight": 1}, {"from": "New Mexico", "number of missions": 4, "to": "Exos", "weight": 1}, {"from": "New Zealand", "number of missions": 13, "to": "Rocket Lab", "weight": 1}, {"from": "North Korea", "number of missions": 5, "to": "KCST", "weight": 1}, {"from": "Pacific Missile Range Facility", "number of missions": 1, "to": "Sandia", "weight": 1}, {"from": "Pacific Ocean", "number of missions": 36, "to": "Sea Launch", "weight": 1}, {"from": "Russia", "number of missions": 13, "to": "Eurockot", "weight": 1}, {"from": "Russia", "number of missions": 1, "to": "Khrunichev", "weight": 1}, {"from": "Russia", "number of missions": 7, "to": "MITT", "weight": 1}, {"from": "Shahrud Missile Test Site", "number of missions": 1, "to": "IRGC", "weight": 1}, {"from": "South Korea", "number of missions": 3, "to": "KARI", "weight": 1}, {"from": "USA", "number of missions": 12, "to": "Blue Origin", "weight": 1}, {"from": "USA", "number of missions": 136, "to": "Boeing", "weight": 1}, {"from": "USA", "number of missions": 1, "to": "Douglas", "weight": 1}, {"from": "USA", "number of missions": 1, "to": "EER", "weight": 1}, {"from": "USA", "number of missions": 251, "to": "General Dynamics", "weight": 1}, {"from": "USA", "number of missions": 79, "to": "Lockheed", "weight": 1}, {"from": "USA", "number of missions": 114, "to": "Martin Marietta", "weight": 1}, {"from": "USA", "number of missions": 203, "to": "NASA", "weight": 1}, {"from": "USA", "number of missions": 100, "to": "SpaceX", "weight": 1}, {"from": "USA", "number of missions": 140, "to": "ULA", "weight": 1}, {"from": "USA", "number of missions": 161, "to": "US Air Force", "weight": 1}, {"from": "USA", "number of missions": 17, "to": "US Navy", "weight": 1}, {"from": "USA", "number of missions": 1, "to": "Virgin Orbit", "weight": 1}]);
+
+        // adding nodes and edges to the graph
+        data = {nodes: nodes, edges: edges};
+
+        var options = {
+    "configure": {
+        "enabled": false
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": false,
+            "type": "continuous"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": true,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+        
+        
+
+        
+
+        network = new vis.Network(container, data, options);
+	 
+        
+
+
+        
+
+        return network;
+
+    }
+
+    drawGraph();
+
+</script>
+</body>
+</html>

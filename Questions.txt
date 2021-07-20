@@ -1,0 +1,3 @@
+Astronaut Dataframe
+1. What is the difference between number column and nationwide_number column?
+2. 
